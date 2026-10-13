@@ -1,6 +1,6 @@
-# 中文科研写作与汇报 Skills
+# 中文科研写作 附图与汇报 Skills
 
-两个可分别安装的 Codex 技能，用于中文科研文字写作和学术汇报。重点是讲清研究意义、方法和结果，让内容准确、逻辑顺畅、容易理解，并保持统一的文档与演示格式。
+三个可分别安装的 Codex 技能，用于中文科研文字写作、科研附图和学术汇报。重点是讲清研究意义、方法和结果，让内容准确、逻辑顺畅、容易理解，并保持统一的文字、图件和演示格式。
 
 ## 包含的技能
 
@@ -8,8 +8,9 @@
 | --- | --- | --- |
 | [科研写作](skills/research-writing/SKILL.md) | 撰写、修改或审阅中文论文、专利说明书和权利要求书；规范 Word 字体、变量和公式 | `$research-writing` |
 | [科研汇报PPT](skills/academic-ppt/SKILL.md) | 制作、修改或规划组会、研究进展、论文及专利研究汇报 | `$academic-ppt` |
+| [科研附图](skills/research-figures/SKILL.md) | 绘制科研矢量图，规范变量斜体，保留源文件；按需生成EMF、插入Word及核验PowerPoint编辑能力 | `$research-figures` |
 
-两个技能可以独立使用。科研写作负责文字与文档，科研汇报PPT负责汇报逻辑与幻灯片排版。
+三个技能可以独立使用，也可配合使用。科研写作负责文字与文档，科研附图负责图件制作与核验，科研汇报PPT负责汇报逻辑与幻灯片排版。
 
 ## 主要规则
 
@@ -33,6 +34,15 @@
 - 避免堆砌数字和复杂推导；详细参数和补充解释可以放入备注，影响结论的重要条件仍在页面中说明。
 - 页数根据内容确定，不固定套用某一份汇报；仅请求大纲时，只提供大纲。
 
+### 科研附图
+
+- 根据当前真实数据、概率函数、模型结果和原始绘图程序制作，不因格式修改重新计算或调整实验结果。
+- 优先使用Python、PPT原生图形或SVG；网络迹线、流程框、曲线和误差棒等按矢量方式输出。
+- 默认白底黑白，以实线、虚线、点线和标记区分对象；当前用户和期刊规范优先。
+- 数学变量用斜体，规范中西文字体、希腊字母、上下标和单位，精简图内冗余解释。
+- 保留并交付可编辑源文件；EMF内部位图检查与PowerPoint实际取消组合测试分别核验。
+- 插入Word时保留指定模板并逐页渲染检查；按需提供格式核验报告。
+
 ## 目录结构
 
 ```text
@@ -49,13 +59,23 @@ research-skills/
     │       ├── paper.md
     │       ├── patent.md
     │       └── word-formatting.md
-    └── academic-ppt/
+    ├── academic-ppt/
+    │   ├── SKILL.md
+    │   ├── agents/
+    │   │   └── openai.yaml
+    │   └── references/
+    │       ├── design-and-checks.md
+    │       └── narrative.md
+    └── research-figures/
         ├── SKILL.md
         ├── agents/
         │   └── openai.yaml
-        └── references/
-            ├── design-and-checks.md
-            └── narrative.md
+        ├── references/
+        │   ├── design.md
+        │   ├── emf.md
+        │   └── word-and-delivery.md
+        └── scripts/
+            └── audit_emf.py
 ```
 
 `SKILL.md` 是技能入口，`references/` 保存按任务使用的详细规则，`agents/openai.yaml` 提供显示名称和默认提示。
@@ -63,7 +83,7 @@ research-skills/
 ## 安装
 
 1. 下载或克隆本仓库。
-2. 打开仓库的 `skills` 文件夹，将其中的 `research-writing` 和 `academic-ppt` 两个文件夹完整复制到 Codex 的用户技能目录。
+2. 打开仓库的 `skills` 文件夹，将其中需要使用的 `research-writing`、`research-figures` 和 `academic-ppt` 文件夹完整复制到 Codex 的用户技能目录。
 3. 如果目标目录已有同名技能，先备份原版本，再决定是否替换。
 4. 在 Codex 中用下面的名称调用。如果当前对话未识别新安装的技能，可重新打开 Codex 并新建对话。
 
@@ -80,9 +100,10 @@ Windows 默认安装后的路径应为：
 ```text
 C:\Users\你的用户名\.codex\skills\research-writing\SKILL.md
 C:\Users\你的用户名\.codex\skills\academic-ppt\SKILL.md
+C:\Users\你的用户名\.codex\skills\research-figures\SKILL.md
 ```
 
-请复制两个技能文件夹本身，并保留其内部文件；不要把整个仓库外层文件夹当作一个技能安装。
+请复制相应技能文件夹本身，并保留其内部文件；不要把整个仓库外层文件夹当作一个技能安装。
 
 ## 使用示例
 
@@ -110,11 +131,17 @@ C:\Users\你的用户名\.codex\skills\academic-ppt\SKILL.md
 使用 $academic-ppt 先给我10页汇报大纲，不生成PPT文件。
 ```
 
+制作专利附图：
+
+```text
+使用 $research-figures 根据我的原始程序和实验结果重绘黑白专利附图，变量用斜体，生成EMF并插入原Word模板，保留SVG和可编辑源文件，核验PowerPoint取消组合并提供报告。
+```
+
 使用时提供相关资料的路径，并说明受众、研究阶段和需要保留的格式。涉及模型结果时，提供当前代码和数据，便于核对结论与图表。
 
 ## 工具要求
 
-这两个技能提供写作与排版指令。实际生成、编辑和检查 Word 或 PPT 文件，需要运行环境提供相应文档与演示工具；技能本身不附带这些软件。
+这三个技能提供写作、绘图与排版指令。实际生成、编辑和检查 Word 或 PPT 文件，需要运行环境提供相应文档与演示工具；技能本身不附带这些软件。科研附图提供仅依赖Python标准库的EMF记录检查脚本；实际转换和PowerPoint测试仍需可用的矢量及Office工具。
 
 制作真正可编辑的 MathType 公式，需要可用的 MathType 及相应编辑能力。公式图片、LaTeX 文本和 Word 原生公式不能冒充 MathType 对象。使用指定字体时，运行环境应安装对应字体。
 
