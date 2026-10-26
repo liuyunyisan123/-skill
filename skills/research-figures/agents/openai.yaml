@@ -1,4 +1,4 @@
 interface:
   display_name: "科研附图"
-  short_description: "绘制科研矢量附图，规范变量斜体，保留源文件并核验EMF和Word排版"
-  default_prompt: "使用 $research-figures 根据我的真实数据和现有图件绘制科研附图，规范变量斜体、保留可编辑源文件，并完成所需格式核验。"
+  short_description: "绘制科研矢量附图，专利图采用可编辑PPT底稿，规范字体并按需导出EMF"
+  default_prompt: "使用 $research-figures 根据我的真实数据绘制科研附图，专利说明书附图沿用参考PPT格式，保留可编辑源文件并按需导出和核验EMF。"
