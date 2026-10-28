@@ -1,4 +1,4 @@
 interface:
   display_name: "科研汇报PPT"
-  short_description: "制作学术风格科研汇报，突出意义、方法与结果，统一字体配色并确保字号不小于18磅"
-  default_prompt: "使用 $academic-ppt 根据我的研究资料制作组会汇报，图多字少，重点讲清意义、方法和结果。"
+  short_description: "制作学术汇报，图表由科研附图技能用代码生成后导入，统一字体配色且可见文字至少18磅"
+  default_prompt: "使用 $academic-ppt 根据我的研究资料制作组会汇报，图多字少，讲清意义、方法和结果；所有科研图表先使用 $research-figures 用代码生成后导入，不在PPT中拼画。"

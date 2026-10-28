@@ -1,4 +1,4 @@
 interface:
   display_name: "科研附图"
-  short_description: "绘制科研矢量附图，专利图采用可编辑PPT底稿，规范字体并按需导出EMF"
-  default_prompt: "使用 $research-figures 根据我的真实数据绘制科研附图，专利说明书附图沿用参考PPT格式，保留可编辑源文件并按需导出和核验EMF。"
+  short_description: "制作科研矢量附图，汇报图用代码生成后导入，专利图保留可编辑PPT底稿并按需导出EMF"
+  default_prompt: "使用 $research-figures 根据我的真实资料制作科研附图；汇报图表用代码生成独立文件后导入PPT，专利附图沿用参考PPT格式，保留源文件并按需导出和核验EMF。"
